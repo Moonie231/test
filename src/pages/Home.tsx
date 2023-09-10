@@ -11,6 +11,7 @@ const Home = () => {
     }
     console.log(work);
     
+    
   return (
     <HomeStyle>
       <div className="avatar">
@@ -24,6 +25,7 @@ const Home = () => {
         <button onClick={() => navigate("/add")}>
             <img src="../../public/add-line.svg"/>
         </button>
+
       </div>
     </HomeStyle>    
   );

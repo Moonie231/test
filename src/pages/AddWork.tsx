@@ -5,14 +5,17 @@ import Home from "./Home";
 
 const AddWork = () => {
   const navigate = useNavigate();
-  const [value, setValues] = useState({
+  const color = ["white", "orange", "blue", "violet", "pink", "green"];
+const [active, setActive] = useState<string>("white")
+  const [value, setValue] = useState({
     title: "",
     content: "",
     isPin: false,
+    color: "white",
   });
 
   const updateField = (e: { target: { name: any; value: any } }) => {
-    setValues({
+    setValue({
       ...value,
       [e.target.name]: e.target.value,
     });
@@ -20,19 +23,25 @@ const AddWork = () => {
 
   const pin = () => {
     if (value.isPin) {
-      setValues({
+      setValue({
         ...value,
         isPin: false,
       });
     } else {
-      setValues({
+      setValue({
         ...value,
         isPin: true,
       });
     }
   };
 
-  console.log(value);
+  const setColor = (color: string) => {
+    setActive(color)
+    setValue({
+      ...value,
+      color: color
+    });
+  }
 
   return (
     <AddWorkStyle>
@@ -56,13 +65,24 @@ const AddWork = () => {
       </div>
 
       <div className="footer">
-        <button onClick={() => {
-           localStorage.setItem("work", JSON.stringify(value))
+        <button
+          onClick={() => {
+            localStorage.setItem("work", JSON.stringify(value));
             navigate("/");
-            
-        }}>
+          }}
+        >
           <img src="../../public/check-line.svg" />
         </button>
+        <div className="color">
+          {color.map((item) => (
+            <div style={{ backgroundColor: item }} onClick={() => setColor(item)}>
+              {active===item &&
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z" fill="rgba(255,255,255,1)"></path></svg>
+              }
+            
+            </div>
+          ))}
+        </div>
       </div>
     </AddWorkStyle>
   );
@@ -102,6 +122,17 @@ const AddWorkStyle = styled.div`
       img {
         width: 40px;
         height: 40px;
+      }
+    }
+    .color {
+      display: flex;
+
+      div {
+        margin: 10px 5px;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
       }
     }
   }
