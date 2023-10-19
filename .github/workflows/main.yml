@@ -14,6 +14,6 @@ jobs:
         with: 
           node-version: "14.x"
       - name: Run lint
-        run: pnpm lint
+        run: pnpm run lint
       - name: Run build
-        run: pnpm build
+        run: pnpm run build
