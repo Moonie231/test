@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Home from "./Home";
 
 const AddWork = () => {
   const navigate = useNavigate();
   const color = ["white", "orange", "blue", "violet", "pink", "green"];
-const [active, setActive] = useState<string>("white")
+  const [active, setActive] = useState<string>("white");
   const [value, setValue] = useState({
     title: "",
     content: "",
@@ -36,12 +35,12 @@ const [active, setActive] = useState<string>("white")
   };
 
   const setColor = (color: string) => {
-    setActive(color)
+    setActive(color);
     setValue({
       ...value,
-      color: color
+      color: color,
     });
-  }
+  };
 
   return (
     <AddWorkStyle>
@@ -75,11 +74,18 @@ const [active, setActive] = useState<string>("white")
         </button>
         <div className="color">
           {color.map((item) => (
-            <div style={{ backgroundColor: item }} onClick={() => setColor(item)}>
-              {active===item &&
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z" fill="rgba(255,255,255,1)"></path></svg>
-              }
-            
+            <div
+              style={{ backgroundColor: item }}
+              onClick={() => setColor(item)}
+            >
+              {active === item && (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M10.0007 15.1709L19.1931 5.97852L20.6073 7.39273L10.0007 17.9993L3.63672 11.6354L5.05093 10.2212L10.0007 15.1709Z"
+                    fill="rgba(255,255,255,1)"
+                  ></path>
+                </svg>
+              )}
             </div>
           ))}
         </div>
